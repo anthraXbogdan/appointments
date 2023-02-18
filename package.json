@@ -1,0 +1,14 @@
+{
+  "name": "appointments",
+  "version": "1.0.0",
+  "description": "an appointment system for a hair salon",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Bogdan Enache",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  }
+}

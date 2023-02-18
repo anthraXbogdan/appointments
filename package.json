@@ -1,14 +1,22 @@
 {
-  "name": "appointments",
-  "version": "1.0.0",
-  "description": "an appointment system for a hair salon",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "author": "Bogdan Enache",
-  "license": "ISC",
-  "devDependencies": {
-    "jest": "^29.4.3"
-  }
+   "name": "appointments",
+   "version": "1.0.0",
+   "description": "an appointment system for a hair salon",
+   "main": "index.js",
+   "scripts": {
+      "test": "jest"
+   },
+   "author": "Bogdan Enache",
+   "license": "ISC",
+   "devDependencies": {
+      "@babel/plugin-transform-runtime": "^7.19.6",
+      "@babel/preset-env": "^7.20.2",
+      "@babel/preset-react": "^7.18.6",
+      "jest": "^29.4.3"
+   },
+   "dependencies": {
+      "@babel/runtime": "^7.20.13",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+   }
 }

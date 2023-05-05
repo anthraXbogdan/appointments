@@ -1,14 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { act } from "react-dom/test-utils";
+import {
+   initializeReactContainer, render, click, element, elements, typesOf, textOf
+} from "./reactTestExtensions";
 import { Appointment, AppointmentsDayView } from "../src/AppointmentsDayView";
 
 describe("Appointment", () => {
-   let container;
-
    beforeEach(() => {
-      container = document.createElement("div");
-      document.body.replaceChildren(container);
+      initializeReactContainer();
    });
 
    const blankCustomer = {
@@ -16,12 +14,6 @@ describe("Appointment", () => {
       lastName: "",
       phoneNumber: ""
    }
-
-   const render = (component) => {
-      act(() => {
-         ReactDOM.createRoot(container).render(component);
-      });
-   };
 
    const appointmentTable = () => {
       return document.querySelector("#appointmentView > table");
@@ -125,8 +117,6 @@ describe("Appointment", () => {
 });
 
 describe("AppointmentsDayView", () => {
-   let container;
-
    const today = new Date();
    const twoAppointments = [
       { startsAt: today.setHours(12, 0), customer: { firstName: "Ashley" } },
@@ -134,15 +124,8 @@ describe("AppointmentsDayView", () => {
    ];
 
    beforeEach(() => {
-      container = document.createElement("div");
-      document.body.replaceChildren(container);
+      initializeReactContainer();
    });
-
-   const render = (component) => {
-      act(() => {
-         ReactDOM.createRoot(container).render(component);
-      });
-   };
 
    it("renders a div with the right id", () => {
       render(<AppointmentsDayView appointments={[]} />);
@@ -157,15 +140,19 @@ describe("AppointmentsDayView", () => {
 
    it("renders an li for each appointment", () => {
       render(<AppointmentsDayView appointments={twoAppointments} />);
-      const listChildren = document.querySelectorAll("ol > li");
-      expect(listChildren).toHaveLength(2);
+      // const listChildren = document.querySelectorAll("ol > li");
+      // expect(listChildren).toHaveLength(2);
+
+      expect(elements("ol > li")).toHaveLength(2);
    });
 
    it("renders the time of each appointment", () => {
       render(<AppointmentsDayView appointments={twoAppointments} />);
-      const listChildren = document.querySelectorAll("li");
-      expect(listChildren[0].textContent).toEqual("12:00");
-      expect(listChildren[1].textContent).toEqual("13:00");
+      // const listChildren = document.querySelectorAll("li");
+      // expect(listChildren[0].textContent).toEqual("12:00");
+      // expect(listChildren[1].textContent).toEqual("13:00");
+
+      expect(textOf(elements("li"))).toEqual(["12:00", "13:00"])
    });
 
    it("initially shows a message saying there are no appointments today", () => {
@@ -183,16 +170,18 @@ describe("AppointmentsDayView", () => {
    it("has a button element in each li", () => {
       render(<AppointmentsDayView appointments={twoAppointments} />);
 
-      const buttons = document.querySelectorAll("li > button");
-      expect(buttons).toHaveLength(2);
-      expect(buttons[0].type).toEqual("button");
+      // const buttons = document.querySelectorAll("li > button");
+      // expect(buttons).toHaveLength(2);
+      // expect(buttons[0].type).toEqual("button");
+
+      expect(typesOf(elements("li > *"))).toEqual(["button", "button"])
    });
 
    it("renders another appointment when selected", () => {
       render(<AppointmentsDayView appointments={twoAppointments} />);
 
       const button = document.querySelectorAll("button")[1];
-      act(() => button.click());
+      click(button);
       expect(document.body.textContent).toContain("Jordan");
    });
 });

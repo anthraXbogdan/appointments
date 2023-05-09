@@ -1,7 +1,7 @@
 {
    "name": "appointments",
    "version": "1.0.0",
-   "description": "an appointment system for a hair salon",
+   "description": "An appointment system for a hair salon",
    "main": "index.js",
    "scripts": {
       "test": "jest",
